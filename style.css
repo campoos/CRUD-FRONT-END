@@ -3,3 +3,88 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+body {
+    padding: 4rem;
+    background-color: yellow;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 4rem;
+    border-bottom: 5px solid tomato;
+}
+
+header img {
+    height: 3rem;
+
+}
+
+header input {
+    height: 3rem;
+    flex-grow: 1;
+    border: 2px solid red;
+    outline: none;
+    border-radius: 4px;
+    padding: 0 12px;
+}
+
+header button {
+    height: 3rem;
+    background-color: red;
+    color: white;
+    padding: 0px 8px;
+    border: none;
+    border-radius: 4px;
+}
+
+main {
+    width: 100vw;
+    margin-top: 4rem;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    gap: 4rem;
+}
+
+.cardContato {
+    height: 300px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+    box-shadow: 2px 2px 8px rgba(255, 0, 212, 1);
+    border-radius: 50%;
+    border-bottom: 32px solid red;
+}
+
+.cardContato img {
+    width: 160px;
+    height: 160px;
+    border: 2px solid pink;
+    border-radius: 50%;
+}
+
+.cardContato h2 {
+    color: red;
+}
+
+.cardContato p {
+    color: red;
+}

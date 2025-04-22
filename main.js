@@ -1,62 +1,37 @@
 "use strict"
 
+import { getContatos, getContatosPorNome } from "./contatos.js"
 
-async function getContatos() {
-    const url = "https://bakcend-fecaf-render.onrender.com/contatos"
-    const response = await fetch(url)
-    const data = await response.json()
+function criarCard(contato) {
+    const container = document.getElementById("container")
 
-    console.log(data)
-
-    return data
+    const card = document.createElement("div")
+    card.classList.add("cardContato")
+    card.innerHTML = `
+    <img src="${contato.foto}" alt="">
+    <h2>${contato.nome}😜</h2>
+    <p>${contato.celular}</p>
+    `
+    container.appendChild(card)
 }
 
-async function postContatos(contatoNovo) {
-    const url = "https://bakcend-fecaf-render.onrender.com/contatos"
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(contatoNovo)
+async function carregarContatos() {
+    const contatos = await getContatos()
+    contatos.forEach(criarCard)
+}
+
+async function exibirPesquisa(evento) {       
+    const container = document.getElementById("container")
+    if(evento.key == "Enter"){
+        const contatos = await getContatosPorNome(evento.target.value)
+        container.replaceChildren("")
+        contatos.forEach(criarCard)
     }
-    const response = await fetch(url, options)
-
-    return response.ok
+    // const contatos = await getContatosPorNome()
+    // contatos.forEach(criarCard)
 }
 
-async function putContatos(contato, id) {
-    const url = `https://bakcend-fecaf-render.onrender.com/contatos/${id}`
-    const options = {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(contato, id)
-    }
-    const response = await fetch(url, options)
+carregarContatos()
 
-    return response.ok
-}
-
-async function deleteContatos(id) {
-    const url = `https://bakcend-fecaf-render.onrender.com/contatos/${id}`
-    const options = {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }
-    const response = await fetch(url, options)
-
-    return response.ok
-}
-
-const contato =  {
-    "nome": "vini",
-    "celular": "11 9 4002-8922",
-    "foto": "../img/vini.png",
-    "email": "vini@gmail.com",
-    "endereco": "sei la sei la, 123",
-    "cidade": "carapicuiba"
-}
+document.getElementById("nomeContato")
+        .addEventListener('keydown', exibirPesquisa)
