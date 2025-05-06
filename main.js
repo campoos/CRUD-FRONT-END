@@ -1,6 +1,6 @@
 "use strict"
 
-import { getContatos, getContatosPorNome } from "./contatos.js"
+import { getContatos, getContatosPorNome, postContatos} from "./contatos.js"
 
 function criarCard(contato) {
     const container = document.getElementById("container")
@@ -39,7 +39,7 @@ function voltarHome() {
     document.querySelector("main").className = "cardShow"
 }
 
-function salvarContato () {
+async function salvarContato () {
     const contato = {
         "nome": document.getElementById("nome").value,
         "celular": document.getElementById("celular").value,
@@ -49,7 +49,11 @@ function salvarContato () {
         "cidade": document.getElementById("cidade").value
       }
 
-      console.log(contato)
+      if (postContatos(contato)){
+        alert("Contato cadastrado com sucesso!!!!!!!!!!!!!!!")
+        await carregarContatos()
+        voltarHome()
+      }
 }
 
 carregarContatos()
@@ -65,3 +69,4 @@ document.getElementById("cancelar")
 
 document.getElementById("salvar")
     .addEventListener("click", salvarContato)
+

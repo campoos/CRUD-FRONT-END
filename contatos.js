@@ -18,7 +18,7 @@ export async function getContatosPorNome(nome) {
 }
 
 
-async function postContatos(contatoNovo) {
+export async function postContatos(contatoNovo) {
     const url = "https://bakcend-fecaf-render.onrender.com/contatos"
     const options = {
         method: "POST",
